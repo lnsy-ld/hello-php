@@ -1,0 +1,76 @@
+<style>
+    td,th{
+        text-align: center;
+    }
+    .td_left{
+        text-align: left;
+    }
+    .table tbody tr {
+        height: 20px;
+    }
+    .table tbody tr td{
+        vertical-align: middle;
+        padding-left: 20px;
+    }
+    small{
+        vertical-align: bottom;
+        margin-bottom: 2px;
+    }
+</style>
+<section class="content">
+    <div class="box box-info clearfix">
+        <div class="form-group"></div>
+        <div class="col-sm-12">
+            <div>
+                <h4>【草稿箱】<small> (总计<span style="color:#ed5565">{$list->total()}</span>条数据)</small>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr style="height:20px;background-color: #00ccff"><th>文章ID</th><th>标题</th><th>副标题</th><th>置顶</th><th>关键词</th><th>最后修改时间</th><th>操作</th></tr>
+                </thead>
+                <tbody>
+                    {volist name="list" id="value"}
+                    <tr>
+                        <td class="col-sm-1">{$value.id}</td>
+                        <td class="col-sm-1">{$value.title}</td>
+                        <td class="col-sm-1">{$value.sub_title}</td>
+                        <td class="col-sm-1">{$value.is_top_msg}</td>
+                        <td class="col-sm-1">{$value.keywords}</td>
+                        <td class="col-sm-1">{$value.update_time}</td>
+                        <td class="col-sm-1">
+                            <a href="{:url('article.article/edit',['id'=>$value.id,'type'=>'draft'])}"><button class='btn btn-warning  btn-sm'>编辑</button></a>
+                            <button class='btn btn-danger  btn-sm delete-page' data-page_id="{$value.id}">删除</button>
+                        </td>
+                    </tr>
+                    {/volist}
+                </tbody>
+            </table>
+            {$list->render()}
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <a href="{:url('article.article/edit',['id'=>0])}"><button  class="btn btn-info">文章发布</button></a>
+            </div>
+        </div>
+        <div class="form-group clearfix"></div>
+        <br />
+    </div>
+</section>
+<script>
+    $(".delete-article").bind('click', function () {
+        var page_id = $(this).data('page_id');
+        if (confirm('您确定要删除该吗')) {
+            $.ajax({
+                url: 'delArticle',
+                type: 'post',
+                data: {
+                    id: page_id
+                },
+                success: function (res) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+</script>

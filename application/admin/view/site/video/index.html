@@ -1,0 +1,52 @@
+<style>
+    td,th{
+        text-align: center;
+    }
+    .table tbody tr {
+        height: 20px;
+    }
+    .table tbody tr td{
+        vertical-align: middle;
+        padding-left: 20px;
+    }
+    small{
+        vertical-align: bottom;
+        margin-bottom: 2px;
+    }
+</style>
+<section class="content">
+    <div class="box box-info clearfix">
+        <div class="form-group"></div>
+        <div class="col-sm-12">
+            <div>
+                <h4>【视频列表】</h4>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr style="height:20px;background-color: #00ccff"><th>视频名称</th><th>文件地址</th><th>操作</th></tr>
+                </thead>
+                <tbody>
+                    {volist name="list" id="value"}
+                    <tr>
+                        <td class="col-sm-2">{$value.video_name}</td>
+                        <td class="col-sm-3">{$value.path}</td>
+                        <td class="col-sm-2">
+                            <a href="{:url('edit',['id'=>$value.id])}"><button class='btn btn-warning  btn-sm edit-link' data-link_id="">编辑</button></a>
+                        </td>
+                    </tr>
+                    {/volist}
+                </tbody>
+            </table>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <a href="{:url('site.video/edit',['id'=>0])}"><button  id="add_one" class="btn btn-info">添加视频</button></a>
+            </div>
+        </div>
+        <div class="form-group clearfix"></div>
+        <br />
+    </div>
+</section>
+
+

@@ -1,0 +1,67 @@
+<section class="content">
+    <div class="box box-info">
+        <!-- Default panel contents -->
+        <form class="form-horizontal"  action="{:url('auth.user/add_user')}"  enctype="multipart/form-data" method="post">
+            <div class="form-group"></div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">登录账号</label>
+                <div class="col-sm-5">
+                    <input type="text" id="username" name="username" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">昵称</label>
+                <div class="col-sm-5">
+                    <input type="text" id="nickname" name="nickname" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-5">
+                    <input type="password" id="pwd" name="password" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">确认密码</label>
+                <div class="col-sm-5">
+                    <input type="password" id="repwd" name="repassword" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">状态</label>
+                <div class="col-sm-5" style="padding-top: 8px;">
+                    <label><input type="radio" name="status" value="1" checked />开启</label>&nbsp;&nbsp;
+                    <label><input type="radio" name="status" value="0" />关闭</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">角色组</label>
+                <div class="col-sm-2">
+                    <select name='role_id' class="form-control" >
+                        {volist name="roles" id="vo"}
+                        <option value='{$vo.role_id}'>{$vo.role_name}</option>
+                        {/volist}
+                    </select>
+                </div>
+            </div>
+
+            <hr />
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-info" id='submint'>提交</button>
+                </div>
+            </div>
+            <div class="form-group"></div>
+        </form>
+    </div>
+</section>
+<script>
+    (function () {
+        
+        $("#submint").bind('click', function () {
+            $("form").submit();
+        });
+
+    })(window);
+</script>
