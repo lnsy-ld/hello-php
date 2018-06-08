@@ -1,8 +1,0 @@
-{layout name="layout/index" /}
-{:widget('Menu/banner')}
-{:widget('Menu/nav_menu')}
-{volist name="list" id="vo"}
-<a href="{:url($vo.id)}" >{$vo.name}</a><br />
-{/volist}
-
-
