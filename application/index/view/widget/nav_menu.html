@@ -1,6 +1,7 @@
-<div>
-    <a href="http://{$host}" >首 页</a>
+
+<div class="navBox">
+    <a href="http://{$host}">首页</a>
     {volist name="menus" id="vo"}
-    <a href="/index.php/{$vo.link_path}" >{$vo.name}</a>  |  
+    <a href="/index.php/{$vo.link_path}" >{$vo.name}</a>
     {/volist}
 </div>
