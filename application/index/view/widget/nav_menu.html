@@ -1,0 +1,6 @@
+<div>
+    <a href="http://{$host}" >首 页</a>
+    {volist name="menus" id="vo"}
+    <a href="/index.php/{$vo.link_path}" >{$vo.name}</a>  |  
+    {/volist}
+</div>

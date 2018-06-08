@@ -1,0 +1,118 @@
+<section class="content">
+    <div class="box box-info clearfix">
+        <form action="{:url('saveNode')}">
+            <div class="form-group"></div>
+            <div class="col-sm-12">
+                <div>
+                    <h4>【节点列表】<a id="selectAll" class="btn btn-info">全选</a><a id="opposite" class="btn btn-info">反选</a></h4>
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        {volist name="list->childs" id="value"}
+                        <tr>
+                            <td style="padding-left: 20px">
+                                <label>
+                                    <input type="checkbox" 
+                                           name="node[{$value.node_id}]" 
+                                           class="ctr_{$value.node_id} ctr" 
+                                           id="{$value.node_id}" 
+                                           />&nbsp;
+                                    {$value.node}
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 50px">
+                                {volist name="value->childs" id="val"}
+                                <label style="width:150px">
+                                    <input type="checkbox" 
+                                           class="method" 
+                                           name="node[{$val.node_id}]" 
+                                           id="{$val.node_id}" 
+                                           data-pid="{$value.node_id}" />
+                                    &nbsp;{$val.node}
+                                </label>
+                                {/volist}
+                            </td>
+                        </tr>
+                        {/volist}
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+            <input type="hidden" name="role_id" id="role_id" value="{$role_id}" />
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <button  type="" id="add_one" class="btn btn-info">提交</button>
+                </div>
+            </div>
+            <div class="form-group clearfix"></div>
+            <br />
+        </form>
+    </div>
+</section>
+<script>
+    var inputs = document.getElementsByTagName("input");
+    $("#selectAll").bind('click', function () {
+        var chk = $(this).html() == '全选' ? true : false;
+        var msg = chk ? '全不选' : '全选';
+        $(this).html(msg);
+        for (var i in inputs) {
+            inputs[i].checked = chk;
+        }
+    });
+    $("#opposite").bind('click', function () {
+        for (var i in inputs) {
+            inputs[i].checked = !inputs[i].checked;
+        }
+    });
+
+    function getRoleNodes() {
+        $.ajax({
+            url: '{:url("auth.role/getRoleNodes")}',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                id: $("#role_id").val()
+            },
+            success: function (res) {
+                var id;
+                for (var i in res) {
+                    id = res[i].node_id;
+                    $("#" + id).attr('checked', true);
+                }
+            }
+        });
+    }
+
+    $(".ctr").bind('click', function () {
+        var ck = this.checked;
+        $("input[data-pid=" + this.id + "]").each(function () {
+            this.checked = ck;
+        });
+    });
+    $(".method").bind('click', function () {
+        var ck = this.checked;
+        var pid = $(this).data('pid');
+        var num = 0;
+        if (ck) {
+            $("#" + pid).prop('checked',true);
+        }
+
+        $("input[data-pid=" + pid + "]").each(function () {
+            if (this.checked) {
+                num += 1;
+            }
+        });
+        if (num <= 0) {
+            $("#" + pid).prop('checked', false);
+        }
+    });
+
+    getRoleNodes();
+
+</script>
+
+

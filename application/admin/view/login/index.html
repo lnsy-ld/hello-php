@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理</title>
+
+        <link href="/public/skin/css/wl_css.css?t=5" rel="stylesheet" type="text/css" />
+        <script src="/public/skin/js/wl.js" type="text/javascript"></script>
+
+
+        <!--formValidator插件相关-->
+        <script src="/public/skin/js/jquery.js" type="text/javascript"></script>
+        <script src="/public/skin/js/formValidatorRegex.js" type="text/javascript"></script>
+        <script language="javascript" type="text/javascript" src="/public/skin/js/formvalidator.js" charset="UTF-8"></script>
+
+        <!--layer弹出层-->
+        <script src="/public/skin/layer/layer.js" type="text/javascript"></script>
+        <style>
+            body{
+                background: url(/public/skin/images/bg1.jpg) no-repeat 0px 0px;
+                font-family: 'Open Sans', sans-serif;
+                background-size:cover;
+                -webkit-background-size:cover;
+                -moz-background-size:cover;
+                -o-background-size:cover;
+                min-height:820px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="login">欢迎登录</h1>
+        <div class="login-form">
+            <div class="head-top"></div>
+
+            <div class="avtar"><img src="/public/skin/images/avtar.png" /></div>
+            <form name="myform" id="myform" action="{:url('login/login')}" method="post">
+                <div class="login_input_body">
+                    <input type="text" class="text" name="username"  onFocus="if (this.value == 'Username')
+                                this.value = '';" onBlur="if (this.value == '') {
+                                            this.value = 'Username';
+                                        }" >
+                    <input type="password" value="" name="userpwd" onFocus="if (this.value == 'password')
+                                this.value = '';" onBlur="if (this.value == '') {
+                                            this.value = 'password';
+                                        }">
+                    <input type="text" value="" name="code" class="code" style="width:100px;">	
+                    <div class="code_img" id="captcha-image">{:captcha_img()}</div>	
+                    <div class="nav0"></div>
+                    <input name="remember_me" id="remember-me" type="checkbox" value="1" checked="checked" ><label>Remember me</label>
+                </div>
+
+
+                <div class="signin">
+                    <input type="submit" value="登录" >
+                </div>
+            </form>
+        </div>
+
+        <div class="copy-rights">
+            <p>Copyright &copy; 2018 爱搜客高端建站系统(CICMS)</p>
+        </div>
+    </body>
+</html>

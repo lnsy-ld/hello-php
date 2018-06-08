@@ -1,0 +1,35 @@
+<aside class="left-side sidebar-offcanvas">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            {foreach  name="side_menu" item="vo" key="controller"}
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa {$vo.icon}"></i>
+                    <span>{$vo.name}</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    {volist name="vo['childrens']" id="v"}
+                    <li id="" class="">
+                        <a href="{:url($controller.'/'.$key)}" style="margin-left: 10px;">
+                            <i class="fa fa-angle-double-right"></i>
+                            <span>{$v}</span>
+                        </a>
+                    </li>
+                    {/volist}
+                </ul>
+            </li>
+            {/foreach}
+        </ul>
+    </section>
+</aside>
+<aside class="right-side">
+    <section class="content-header">
+        <h1>
+            {$current_action_name}
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href=""><i class="fa fa-dashboard"></i>{$current_action_name|default=""}</a></li>
+            <li class="active">{$current_content_name|default=""}</li>
+        </ol>
+    </section>

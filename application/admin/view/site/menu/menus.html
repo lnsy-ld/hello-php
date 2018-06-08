@@ -1,0 +1,282 @@
+<style>
+    td,th{
+        text-align: center;
+    }
+    .td_left{
+        text-align: left;
+    }
+    .table tbody tr {
+        height: 20px;
+    }
+    .table tbody tr td{
+        vertical-align: middle;
+        padding-left: 20px;
+    }
+    small{
+        vertical-align: bottom;
+        margin-bottom: 2px;
+    }
+</style>
+<section class="content">
+    <div class="box box-info clearfix">
+        <div class="form-group"></div>
+        <div class="col-sm-12">
+            <div>
+                <h4>【菜单结构列表】{/*<small>  (总计<span style="color:#ed5565"></span>条数据)</small>*/}
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr style="height:20px;background-color: #00ccff"><th>菜单名称</th><th>链接地址</th><th>打开方式</th><th>状态</th><th>排序</th><th>操作</th></tr>
+                </thead>
+                <tbody>
+                    {volist name="list" id="value"}
+                    <tr>
+                        <td class="col-sm-3 td_left">{$value.name}</td>
+                        <td class="col-sm-2">{$value.link_path}</td>
+                        <td class="col-sm-1">{$value.target_msg}</td>
+                        <td class="col-sm-1">{$value.status_msg}</td>
+                        <td class="col-sm-1">{$value.order_weight}</td>
+                        <td class="col-sm-4">
+                            <button class='btn btn-warning  btn-sm edit-menu' data-menu_id="{$value.menu_id}">编辑</button>
+                            <button class='btn btn-info  btn-sm add-children' data-menu_id="{$value.menu_id}">添加子菜单</button>
+                            <button class='btn btn-danger  btn-sm delete-menu' data-menu_id="{$value.menu_id}">删除</button>
+                        </td>
+                    </tr>
+                    {if condition="$value.childrens neq []"}
+                    {volist name="$value.childrens" id="val"}
+                    <tr>
+                        <td class="td_left">&nbsp;&nbsp;&nbsp;&nbsp;|--->{$val.name}</td>
+                        <td class="col-sm-2">{$val.link_path}</td>
+                        <td class="col-sm-2">{$val.target_msg}</td>
+                        <td>{$val.status_msg}</td>
+                        <td>{$val.order_weight}</td>
+                        <td class="col-sm-1">
+                            <button class='btn btn-warning btn-sm edit-menu' data-menu_id="{$val.menu_id}">编辑</button>
+                            <button class='btn btn-danger  btn-sm delete-menu' data-menu_id="{$val.menu_id}">删除</button>
+                        </td>
+                    </tr>
+                    {/volist}
+                    {/if}
+                    {/volist}
+                </tbody>
+            </table>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <div class="col-sm-10">
+                <button  id="add_one" class="btn btn-info">添加导航</button>
+            </div>
+        </div>
+        <div class="form-group clearfix"></div>
+        <br />
+    </div>
+</section>
+<section>
+    <div id="add_layer" style="display: none;padding:auto">
+        <div class="content">
+            <!-- Default panel contents -->
+            <div class="form-horizontal">
+                <div class="form-group"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">菜单名称</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="menu_name" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">链接地址</label>
+                    <div class="col-sm-5">
+                        <input type="text" name="link_path" id="link_path" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">上级菜单</label>
+                    <div class="col-sm-5">
+                        <select id="parent_id" class="form-control" />
+                        <option value="0">作为一级标签</option>
+                        {volist name="list" id="value"}
+                        <option value="{$value.menu_id}">{$value.name}</option>
+                        {if condition="$value.childrens neq []"}
+                        {volist name="$value.childrens" id="val"}
+                        <option value="{$val.menu_id}">&nbsp;&nbsp;&nbsp;|---->{$val.name}</option>
+                        {/volist}
+                        {/if}
+                        {/volist}
+                        </select>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">排序权重</label>
+                    <div class="col-sm-5">
+                        <input type="text" id="order_weight" class="form-control" value="0" />
+                        <small>(数字越大越靠前)</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">打开方式</label>
+                    <div class="col-sm-5">
+                        <select id="target" class="form-control" />
+                        <option value="_blank">当前窗口</option>
+                        <option value="_self">新窗口</option>
+                        </select>
+                    </div>
+                    <small class="col-sm-3"></small>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">状态</label>
+                    <div class="col-sm-5" style="margin-top: 6px;">
+                        <label><input type="radio" name="menu_status" value="1" />开启</label>
+                        <label><input type="radio" name="menu_status" value="0" />关闭</label>
+                    </div>
+                </div>
+
+                <hr />
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <button type="" class="btn btn-info" id="save">提交</button>
+                    </div>
+                </div>
+                <input type="hidden" name="save_type" />
+                <input type="hidden" id="menu_id" value="" />
+                <div class="form-group"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $('#add_one').on('click', function () {
+        $("#menu_name").val('');
+        $("#link_path").val('');
+        $("#parent_id").val(0);
+        $("#parent_id").attr('disabled', 'disabled');
+        $("#order_weight").val(0);
+        $("#menu_id").val(0);
+        layer.open({
+            type: 1,
+            title: '<h4>新增菜单</h4>',
+            area: ['600px', '530px'],
+            shadeClose: true, //点击遮罩关闭
+            content: $("#add_layer")
+        });
+    });
+    $('.add-children').bind('click', function () {
+        $("#parent_id").val($(this).data('menu_id'));
+        $("#menu_name").val('');
+        $("#link_path").val('');
+        layer.open({
+            type: 1,
+            title: '<h4>新增菜单</h4>',
+            area: ['600px', '530px'],
+            shadeClose: true, //点击遮罩关闭
+            content: $("#add_layer")
+        });
+    });
+    $(".edit-menu").bind('click', function () {
+        var menu_id = $(this).data('menu_id');
+        $.ajax({
+            url: 'getMenuInfo',
+            type: 'post',
+            data: {
+                menu_id: menu_id
+            },
+            success: function (res) {
+                console.log(res);
+                $("#menu_name").val(res.name);
+                $("#link_path").val(res.link_path);
+                $("#parent_id").val(res.parent_id);
+                $("#parent_id").attr('disabled', 'disabled');
+                $("#order_weight").val(res.order_weight);
+                $("#template").val(res.template);
+                $("#target").val(res.target);
+                $("#menu_id").val(res.menu_id);
+                $("#form").action = "{:url('edit_menu')}";
+                $("input[name=menu_status]").each(function () {
+                    if (this.value == res.status) {
+                        this.checked = true;
+                        console.log(this.checked);
+                    }
+                })
+                layer.open({
+                    type: 1,
+                    title: '<h4>菜单编辑</h4>',
+                    area: ['600px', '530px'],
+                    shadeClose: true, //点击遮罩关闭
+                    content: $("#add_layer")
+                });
+
+            }
+        })
+    });
+
+    $(".delete-menu").bind('click', function () {
+        var menu_id = $(this).data('menu_id');
+        if (confirm('您确定要删除该菜单吗')) {
+            $.ajax({
+                url: 'deleteMenu',
+                type: 'post',
+                dataType:'json',
+                data: {
+                    menu_id: menu_id
+                },
+                success: function (res) {
+                    if (res.code == 500) {
+                        alert(res.msg);
+                    }else{
+                        alert('删除成功!');
+                        window.location.reload();
+                    }
+                }
+            })
+        }
+    });
+
+    $("#save").bind('click', function () {
+        layer.close(layer.index);
+        var name = $("#menu_name").val();
+        var link_path = $("#link_path").val();
+        var parent_id = $("#parent_id").val();
+        var order_weight = $("#order_weight").val();
+        var template = $("#template").val();
+        var target = $("#target").val();
+        var menu_id = $("#menu_id").val();
+        var status = '';
+        $("input[name=menu_status]").each(function () {
+            if (this.checked == true) {
+                status = this.value;
+            }
+        });
+        if ($.trim(name) == '') {
+            $("#menu_name").focus();
+            alert('菜单名称不能为空');
+            return false;
+        }
+        if ($.trim(link_path) == '') {
+            $("#alias_name").focus();
+            alert('链接地址不可为空');
+            return false;
+        }
+        $.ajax({
+            url: 'saveMenu',
+            type: 'post',
+            data: {
+                menu_id: menu_id,
+                name: name,
+                link_path: link_path,
+                parent_id: parent_id,
+                order_weight: order_weight,
+                target_type: target,
+                template: template,
+                status: status
+            },
+            success: function (res) {
+                if (res.code == 500) {
+                    alert(1);
+                }
+                window.location.reload();
+            }
+        });
+    });
+</script>
+
