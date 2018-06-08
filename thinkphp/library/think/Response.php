@@ -120,7 +120,6 @@ class Response
                 }
             }
         }
-
         echo $data;
 
         if (function_exists('fastcgi_finish_request')) {
