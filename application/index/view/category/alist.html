@@ -1,8 +1,26 @@
 {layout name="layout/index" /}
-{:widget('Menu/banner')}
-{:widget('Menu/nav_menu')}
-{volist name="list.data" id="vo"}
-<a href="{:url('article/'.$vo.id)}" >{$vo.title}</a><br />
-{/volist}
+
+<div class="content">
+    <div class="leftBox wow fadeInLeft" data-wow-delay="0.3s">
+        {volist name="articles" id="vo"}
+        <a href="{:url('article/'.$vo.id)}" >
+            <div class="articleList">
+                <p class="articleTitle">{$vo.title}</p>
+                <div class="article">{$vo.content}</div>
+                <p class="infoBox">
+                    <i class="fa fa-user"></i><span>{$vo.author}</span>
+                    <i class="fa fa-clock-o"></i><span>{$vo.create_time}</span>
+                    <i class="fa fa-tags"></i><span class="fromLable">{$tag}</span>
+                </p>
+            </div>
+        </a>
+        {/volist}
+
+        <div class="lookmore"><a href="">加载更多>></a></div>
+    </div>
+    {:widget('Menu/userinfo')}
+    {:widget('Menu/tags')}
+    <img class="monkey" src="/public/index/images/monkey.png" alt="">
+</div>
 
 

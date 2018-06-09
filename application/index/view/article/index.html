@@ -1,13 +1,18 @@
 {layout name="layout/index" /}
-{:widget('Menu/banner')}
-{:widget('Menu/nav_menu')}
-<br />
-{$info['title']}<br />
-{$info['sub_title']}<br />
-{$info['keywords']}<br />
-{$info['author']}<br />
-{$info['create_time']}<br />
-{$info['content']}<br />
+<div class="content">
+    <div class="centerBox wow fadeInLeft" data-wow-delay="0.3s">
+
+        <h1>{$info['title']}</h1>
+        <h3>{$info['sub_title']}</h3>
+        <p>{$info['keywords']}</p>
+        <div class="userinfoBox">
+            <span>来自： {$info['author']}</span>          
+            <i class="fa fa-clock-o"></i>  <span>{$info['create_time']} </span>
+        </div>
+        <br/>
+        {$info['content']}<br />
+    </div>
+</div>
 
 
 

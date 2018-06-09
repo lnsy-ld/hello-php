@@ -1,0 +1,14 @@
+<div class="rightBox2 wow fadeInRight" data-wow-delay="0.2s">
+        <div class="titleBox">
+            <i class="fa fa-tags"></i>
+            <span>热门标签</span>
+        </div>
+        <div class="lableBox">
+            {volist name='tag' id='vo'}
+            <a href="index.php/category/{$vo.id}">
+                {$vo.name}
+                ({$vo.article_num})
+            </a>
+            {/volist}
+        </div>
+    </div>

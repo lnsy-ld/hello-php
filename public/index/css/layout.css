@@ -42,7 +42,9 @@ body{
   height:100%;
   background:#171431;
 }
-
+a{
+    text-decoration: none
+}
 #body .header{
   width:1200px;
   background:url(../images/banner.png) no-repeat 0 0 scroll;
@@ -276,6 +278,7 @@ color:#171431;
   padding-bottom:0;
   box-sizing:border-box;
   margin-bottom:0;
+ 
 }
 #body .content .leftBox .articleList .article{
   width:100%;
@@ -360,4 +363,40 @@ background: linear-gradient(to right, transparent, #fff 50%);
 #body .content .leftBox .lookmore>a{
   text-decoration:none;
   color:#000;
+}
+#body .content .centerBox{
+    width:1200px;
+    height:auto;
+    margin:0 auto;
+    background:white;
+    padding:20px;
+    box-sizing: border-box;
+    margin-bottom:80px
+}
+
+#body .content .centerBox .userinfoBox{
+    width:100%;
+    height:auto;
+    overflow:hidden;
+    margin:0 auto;
+}
+#body .content .centerBox>p{
+    width:100%;
+    height:auto;
+    margin:0;
+    padding:0;
+}
+#body .content .centerBox .userinfoBox>span{
+   font-size:13px;
+   color:#828282;
+   float:left;
+   margin-top:4px
+}
+#body .content .centerBox .userinfoBox .fa{
+   font-size:16px;
+   color:#828282;
+   float:left;
+   margin-top:8px;
+   margin-right:4px;
+   margin-left:40px;
 }

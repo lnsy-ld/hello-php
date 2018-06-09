@@ -32,12 +32,21 @@ class Category extends Base
         $id = $param['id'];
         $where['category_id'] = $id;
         $where['status'] = 1;
-        $list = model('Article')->getArticles($where);
-        obj2arr($list);
-        $this->assign('list', $list);
+        $list = model('Article')->where($where)->order('is_top desc,update_time desc')->paginate(10);
+        $this->assign('articles_num',$list->total());
+        $this->assign('articles', $list);
         $this->assign('title', '首页');
+        $this->attachTag($id);
         $content = $this->fetch();
         return $content;
+    }
+    
+    private function attachTag($id){
+        $category  = model('ArticleCategory')->getCategorys();
+        $this->assign('category_num',$category->total());
+        obj2arr($category);
+        $cates = array_column($category['data'], null,'id');
+        $this->assign('tag',$cates[$id]['name']);
     }
 
 }
