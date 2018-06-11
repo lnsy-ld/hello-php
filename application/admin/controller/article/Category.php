@@ -29,7 +29,7 @@ class Category extends Base
         } else {
             $cataroy->allowField(true)->save();
         }
-        $this->redirect('lists');
+        return 1;
     }
 
     public function getCategoryInfo()

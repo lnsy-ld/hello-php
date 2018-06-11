@@ -1,0 +1,59 @@
+<style>
+    td,th{
+        text-align: center;
+    }
+    .table tbody tr {
+        height: 20px;
+    }
+    .table tbody tr td{
+        vertical-align: middle;
+        padding-left: 20px;
+    }
+    small{
+        vertical-align: bottom;
+        margin-bottom: 2px;
+    }
+</style>
+<section class="content">
+    <div class="box box-info clearfix">
+
+        <div class="form-group"></div>
+        <div class="col-sm-12">
+            <div>
+                <h4>【图片列表】</h4>
+            </div>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr style="height:20px;background-color: #00ccff"><th>图片</th><th>图片地址</th></tr>
+                </thead>
+                <tbody>
+                    {volist name="list" id="value"}
+                    <tr>
+                        <td class="col-sm-2"><img src="{$value.image_path}" height="80px" /></td>
+                        <td class="col-sm-3">{$value.image_path}</td>
+                    </tr>
+                    {/volist}
+                </tbody>
+            </table>
+        </div>
+        <form action="{:url('site.image/saveImage')}" enctype="multipart/form-data" method="post">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-5">
+                        <input type="file" name="file" />
+                        <button type="submit" class="btn btn-info" id="save">添加图片</button>
+                    </div>
+                </div>
+                <input type="hidden" id="id" value="{$id|default=0}" />
+            </div>
+            <label class="col-sm-2 control-label"></label>
+            <br />
+            <div class="form-group clearfix"></div>
+        </form>
+        <div class="form-group clearfix"></div>
+        <br />
+    </div>
+</section>
+
+

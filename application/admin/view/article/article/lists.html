@@ -39,7 +39,7 @@
                         <td class="col-sm-1">{$value.update_time}</td>
                         <td class="col-sm-1">
                             <a href="{:url('article.article/edit',['id'=>$value.id,'type'=>'lists'])}"><button class='btn btn-warning  btn-sm'>编辑</button></a>
-                            <button class='btn btn-danger  btn-sm delete-page' data-page_id="{$value.id}">删除</button>
+                            <button class='btn btn-danger  btn-sm delete-article' data-page_id="{$value.id}">删除</button>
                         </td>
                     </tr>
                     {/volist}
@@ -59,6 +59,7 @@
 </section>
 <script>
     $(".delete-article").bind('click', function () {
+        console.log(1);
         var page_id = $(this).data('page_id');
         if (confirm('您确定要删除该吗')) {
             $.ajax({

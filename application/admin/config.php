@@ -11,6 +11,7 @@ return [
                 'site.menu/menus' => '菜单管理',
                 'site.link/link' => '友情链接',
                 'site.page/single_page' => '单页内容管理',
+                'site.image/index' => '图片管理',
                 'site.video/index' => '视频管理',
             ],
         ],

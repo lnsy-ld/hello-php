@@ -4,7 +4,6 @@ namespace app\admin\controller\article;
 
 use think\Db;
 use app\admin\controller\Base;
-
 class Article extends Base
 {
 
@@ -40,9 +39,9 @@ class Article extends Base
     {
         $param = request()->param();
         $param['content'] = $param['editorValue'];
-        $type = $param['type']? : 'lists';
+        $type = $param['type'] ?: 'lists';
         if ($param['id'] > 0) {
-            Db::name('article')->where('id',$param['id'])->update($param);
+            Db::name('article')->where('id', $param['id'])->update($param);
         } else {
             Db::name('article')->insert($param);
         }
@@ -77,5 +76,15 @@ class Article extends Base
         $this->assign('page', '回收站');
         $this->myAssign();
         return $this->myFetch();
+    }
+
+    public function delArticle()
+    {
+        $params = request()->param();
+        if (empty($params['id'])) {
+            return ['error' => 'missing params'];
+        }
+        $res = db('article')->delete($params['id']);
+        exit(json_encode($res, JSON_UNESCAPED_UNICODE));
     }
 }
