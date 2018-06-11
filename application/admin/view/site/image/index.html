@@ -24,25 +24,30 @@
             </div>
             <table class="table table-bordered table-hover">
                 <thead>
-                    <tr style="height:20px;background-color: #00ccff"><th>图片</th><th>图片地址</th></tr>
+                    <tr style="height:20px;background-color: #00ccff"><th>图片</th><th>图片地址</th><th>操作</th></tr>
                 </thead>
                 <tbody>
                     {volist name="list" id="value"}
                     <tr>
                         <td class="col-sm-2"><img src="{$value.image_path}" height="80px" /></td>
                         <td class="col-sm-3">{$value.image_path}</td>
+                        <td class="col-sm-1">
+                            <button class='btn btn-danger  btn-sm delete-image' data-image_id="{$value.id}">删除</button>
+                        </td>
                     </tr>
                     {/volist}
                 </tbody>
             </table>
+            <hr />
         </div>
+
         <form action="{:url('site.image/saveImage')}" enctype="multipart/form-data" method="post">
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="col-sm-2 control-label"></label>
                     <div class="col-sm-5">
                         <input type="file" name="file" />
-                        <button type="submit" class="btn btn-info" id="save">添加图片</button>
+                        <button type="submit" class="btn btn-info" id="save">添加</button>
                     </div>
                 </div>
                 <input type="hidden" id="id" value="{$id|default=0}" />
@@ -55,5 +60,23 @@
         <br />
     </div>
 </section>
+
+<script>
+    $(".delete-image").bind('click', function () {
+        var image_id = $(this).data('image_id');
+        if (confirm('您确定要删除该吗')) {
+            $.ajax({
+                url: 'deleteImage',
+                type: 'post',
+                data: {
+                    id: image_id
+                },
+                success: function (res) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
+</script>
 
 

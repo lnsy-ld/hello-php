@@ -28,8 +28,8 @@ class Image extends Base
 
     public function edit()
     {
-        $param= request()->param();
-        $this->assign('id',$param['id']);
+        $param = request()->param();
+        $this->assign('id', $param['id']);
         $this->myAssign();
         return $this->myFetch();
     }
@@ -40,11 +40,9 @@ class Image extends Base
         if ($file) {
             $info = $file->move(ROOT_PATH.'public'.DS.'uploads');
             if ($info) {
-                // 输出 20160820/42a79759f284b767dfcb2a0197904287.jpg
                 $url = DS.'public'.DS.'uploads'.DS.$info->getSaveName();
                 $image = $url;
             } else {
-                // 上传失败获取错误信息
                 echo $file->getError();
                 exit;
             }
@@ -52,5 +50,20 @@ class Image extends Base
         $data['image_path'] = $image;
         Db::name('image')->insert($data);
         $this->redirect('index');
+    }
+
+    public function deleteImage()
+    {
+        $params = request()->param();
+
+        if (empty($params['id'])) {
+            return ['error' => 'missing params'];
+        }
+        $info = Db::name('image')->where('id', $params['id'])->find();
+        if ($info  && unlink('/var/www'.$info['image_path'])) {
+            $res = db('image')->delete($params['id']);
+            exit(json_encode($res, JSON_UNESCAPED_UNICODE));
+        }
+        exit(json_encode('error', JSON_UNESCAPED_UNICODE));
     }
 }
