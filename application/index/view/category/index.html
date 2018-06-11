@@ -1,6 +1,9 @@
 {layout name="layout/index" /}
 {volist name="list" id="vo"}
-<a href="{:url($vo.id)}" >{$vo.name}</a><br />
+<a href="{:url($vo.id)}" >
+    {$vo.name}
+    <img src="{$vo.category_image}" width="200px" />
+</a><br />
 {/volist}
 
 
