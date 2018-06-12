@@ -21,6 +21,8 @@ class Category extends Base
         $this->assign('action', '文章分类');
         $this->assign('page', '列表');
         $this->assign('list', $list['data']);
+        $category = array_column($list['data'],'name');
+        $this->assign('page_keywords',implode(',',$category));
         $this->assign('title', '首页');
         $content = $this->fetch();
         return $content;

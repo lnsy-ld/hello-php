@@ -8,10 +8,10 @@ class WriteHtmlCache
     //回调函数，当程序结束时自动调用此函数
     public function run(&$contents)
     {
-        $module = request()->module();
-        if (!in_array($module, config('html_cache_module')) || !get_cfg('html_cache')) {
-            return FALSE;
-        }
+//        $module = request()->module();
+//        if (!in_array($module, config('html_cache_module')) || !get_cfg('html_cache')) {
+//            return FALSE;
+//        }
         $url = request()->url();
         $cachePath = HTML_CACHE_PATH;
         $fileName = md5($url).'.'.VIEW_SUFFIX;

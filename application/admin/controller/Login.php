@@ -18,9 +18,9 @@ class Login extends Base
     {
         $param = $this->request->param();
 
-        if (!captcha_check($param['code'])) {
-            $this->error('验证码错误!', 'index', 1);
-        }
+//        if (!captcha_check($param['code'])) {
+//            $this->error('验证码错误!', 'index', 1);
+//        }
         $name = $param['username'];
         $password = $param['userpwd'];
         $model = new User();

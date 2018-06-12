@@ -15,7 +15,6 @@ class Cache extends Base
 
     public function clearCache()
     {
-        exit(json_encode(1, JSON_UNESCAPED_UNICODE));
         $this->assign('action', '网站基本信息');
         $this->assign('page', '设置');
         $list = [

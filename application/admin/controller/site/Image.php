@@ -66,4 +66,5 @@ class Image extends Base
         }
         exit(json_encode('error', JSON_UNESCAPED_UNICODE));
     }
+    
 }
