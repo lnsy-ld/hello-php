@@ -11,9 +11,17 @@ class Base extends Controller
     public function __construct()
     {
         header("Content-type:text/html; charset='utf-8'");
-
         parent::__construct();
+        
+        $session = request()->session();
+        exit(json_encode($session, JSON_UNESCAPED_UNICODE));
+
         $this->assignMenu();
+        $this->statisticsAccess();
+    }
+    
+    private function statisticsAccess(){
+        
     }
 
     private function assignMenu()

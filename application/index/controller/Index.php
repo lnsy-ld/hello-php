@@ -13,7 +13,6 @@ class Index extends Base
         $option = $options->all();
         $this->assign('option', $option);
         $this->assign('title', '首页');
-        $this->attachTag();
         $this->attachArticle();
         $content = $this->fetch();
         return $content;
