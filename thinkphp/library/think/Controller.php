@@ -24,6 +24,11 @@ class Controller
      * @var \think\View 视图类实例
      */
     protected $view;
+    
+    /**
+     * @var  redids
+     */
+    protected $redis;
 
     /**
      * @var \think\Request Request 实例
@@ -52,6 +57,9 @@ class Controller
      */
     public function __construct(Request $request = null)
     {
+        $this->redis = new \Redis();
+        $this->redis->connect('127.0.0.1', 6379);
+
         Hook::listen('read_html_cache');
         $this->view    = View::instance(Config::get('template'), Config::get('view_replace_str'));
         $this->request = is_null($request) ? Request::instance() : $request;

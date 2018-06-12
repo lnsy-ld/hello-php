@@ -12,16 +12,22 @@ class Base extends Controller
     {
         header("Content-type:text/html; charset='utf-8'");
         parent::__construct();
-        
-        $session = request()->session();
-        exit(json_encode($session, JSON_UNESCAPED_UNICODE));
-
         $this->assignMenu();
         $this->statisticsAccess();
+        $remote_addr = $_SERVER['REMOTE_ADDR'];
+        cookie('SESSIONID', md5($remote_addr.'hello-php'));
     }
-    
-    private function statisticsAccess(){
-        
+
+    private function statisticsAccess()
+    {
+        if (isset($_COOKIE['SESSIONID'])) {
+            $session_id = $_COOKIE['SESSIONID'];
+            $session_prefix = 'access_user_'.$session_id;
+            if (!$this->redis->get($session_prefix)) {
+                $this->redis->incr('site_access_count');
+            }
+            $this->redis->set($session_prefix, true, ACCESS_VALIDITY_TIME);
+        }
     }
 
     private function assignMenu()

@@ -26,12 +26,14 @@ class Widget extends Controller
 
     public function userinfo()
     {
+        $this->redis->connect('127.0.0.1', 6379);
         $where['status'] = 1;
         $list = model('Article')->where($where)->order('is_top desc,update_time desc')->paginate(10);
         $category = model('ArticleCategory')->getCategorys();
         $this->assign('category_num', $category->total());
         $this->assign('articles_num', $list->total());
-        $this->assign('access_num', '5');
+        $access_num = $this->redis->get('site_access_count');
+        $this->assign('access_num', $access_num);
         return $this->fetch('widget/userinfo');
     }
 
@@ -39,6 +41,11 @@ class Widget extends Controller
     {
         $this->attachTag();
         return $this->fetch('widget/tags');
+    }
+    
+    public function monkey()
+    {
+        return $this->fetch('widget/monkey');
     }
 
     private function attachTag()

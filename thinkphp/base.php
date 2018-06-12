@@ -32,6 +32,7 @@ defined('ENV_PREFIX') or define('ENV_PREFIX', 'PHP_'); // 环境变量的配置�
 defined('PWD_SIGN') or define('PWD_SIGN', 'hello-php'); // 环境变量的配置前缀
 defined('HTML_CACHE_PATH') or define('HTML_CACHE_PATH', RUNTIME_PATH.'html'.DS); // 静态页面文件后缀
 defined('VIEW_SUFFIX') or define('VIEW_SUFFIX', 'tpl'); // 静态页面文件后缀
+defined('ACCESS_VALIDITY_TIME') or define('ACCESS_VALIDITY_TIME', 1800); // 静态页面文件后缀
 
 // 环境常量
 define('IS_CLI', PHP_SAPI == 'cli' ? true : false);
