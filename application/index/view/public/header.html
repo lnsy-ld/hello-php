@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{$title|default=''}{$title?' | ':''}{:get_cfg('site_name','')}</title>
+    <head>
+        <title>{$title|default=''}{$title?' | ':''}{:get_cfg('site_name','')}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="{:get_cfg('keywords')}{$page_keywords?','.$page_keywords:''}"/>
@@ -11,7 +11,7 @@
         <link type="text/css" rel="stylesheet" href="/public/index/css/animate.min.css" />
         <script src="/public/index/js/jquery-1.8.3.min.js" language="JavaScript"></script>
         <script src="/public/index/js/wow.min.js" language="JavaScript"></script>
-</head>
-<body>
-  <div id="body">
-      {:widget('Menu/banner')}
+    </head>
+    <body>
+        <div id="body">
+            {:widget('Widget/banner')}
