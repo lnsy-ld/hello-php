@@ -15,8 +15,6 @@ class Page extends Base
         $this->assign('menus',$menus);
         $this->assign('info', $info);
         $this->assign('page_keywords',$info['keywords']);
-        $this->assign('action', '单页内容管理');
-        $this->assign('page', '页面列表');
         $this->assign('title', '首页');
         return $this->fetch();
     }

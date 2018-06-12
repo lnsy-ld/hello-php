@@ -1,4 +1,10 @@
 {layout name="layout/index" /}
-<div>
-    {$info.content}
+
+
+<div class="content">
+    <div class="leftBox wow fadeInLeft" data-wow-delay="0.3s">
+        {$info.content}
+    </div>
+    {:widget('Widget/userinfo')}
+    <img class="monkey" src="/public/index/images/monkey.png" alt="">
 </div>
