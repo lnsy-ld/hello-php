@@ -1,9 +1,14 @@
 {layout name="layout/index" /}
 {volist name="list" id="vo"}
-<a href="{:url($vo.id)}" >
-    {$vo.name}
-    <img src="{$vo.category_image}" width="200" />
-</a>
-<br />
-{:widget('widget/monkey')}
-{/volist}
+<div class="content">
+    <div class="leftBox wow fadeInLeft" data-wow-delay="0.3s">
+        <a href="{:url($vo.id)}" >
+            {$vo.name}
+            <img src="{$vo.category_image}" width="200" />
+        </a>
+        <br />
+    </div>
+    {:widget('widget/userinfo')}
+    {:widget('widget/monkey')}
+    {/volist}
+</div>

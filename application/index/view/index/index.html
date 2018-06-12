@@ -16,7 +16,9 @@
             </div>
         </a>
         {/volist}
+        {if condition="$articles neq '' "}
         <div class="lookmore"><a href="">加载更多>></a></div>
+        {/if}
     </div>
     {:widget('widget/tags')}
     {:widget('widget/userinfo')}
