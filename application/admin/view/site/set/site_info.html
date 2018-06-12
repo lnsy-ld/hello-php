@@ -4,17 +4,17 @@
         <form class="form-horizontal"  action="save_config"  enctype="multipart/form-data" method="post">
             <div class="form-group"></div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">网站LOGO</label>
+                <label class="col-sm-2 control-label">网站LOGO地址</label>
                 <div class="col-sm-10">
-                    <img src="{:get_cfg('site_logo')}"  style="max-height: 50px;margin-bottom: 5px;" /><span>{$file_error_msg|default=''}</span>
-                    <input type="file" name="site_logo" />
+                    <img src="{:get_cfg('site_logo')}"  style="max-height: 50px;margin-bottom: 5px;" /><span>{$file_error_msg|default=''}</span><br />
+                    <input type="text" name="site_logo"  value="{:get_cfg('site_logo')}"   style='width:600px' />
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">站长头像</label>
+                <label class="col-sm-2 control-label">站长头像地址</label>
                 <div class="col-sm-10">
-                    <img src="{:get_cfg('avatar_image')}"  style="max-height: 50px;margin-bottom: 5px;" /><span>{$file_error_msg|default=''}</span>
-                    <input type="file" name="avatar_image" />
+                    <img src="{:get_cfg('avatar_image')}"  style="max-height: 50px;margin-bottom: 5px;" /><span>{$file_error_msg|default=''}</span><br />
+                    <input type="text" name="avatar_image" value="{:get_cfg('avatar_image')}" style='width:600px' />
                 </div>
             </div>
             <div class="form-group">
