@@ -7,6 +7,7 @@ class ReadHtmlCache
 
     public function run()
     {
+        return FALSE;
         $module = request()->module();
         if (!in_array($module, config('html_cache_module')) || !get_cfg('html_cache')) {
             return FALSE;
